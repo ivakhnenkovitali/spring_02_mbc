@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MyFirstSpringWebMvcSuperController {
@@ -22,8 +23,14 @@ public class MyFirstSpringWebMvcSuperController {
         }
 
         ////вторая полавина занятие
-        public String passParamSpringApproach(String par1, int par2, HttpServletRequest rew){
-
+    @GetMapping(value = "/springApproach")
+        public String passParamSpringApproach(
+            @RequestParam(name = "par1")String name,
+            @RequestParam(name = "par2", required = false) Integer age,
+            HttpServletRequest req)  {
+          req.setAttribute("strPar", name);
+          req.setAttribute("intPar", age);
+          return "main";
         }
     }
 
